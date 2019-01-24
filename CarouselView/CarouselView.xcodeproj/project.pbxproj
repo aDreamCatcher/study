@@ -15,7 +15,6 @@
 		AB0BEF8521F8B4C400AB4A9A /* CarouselViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BEF8421F8B4C400AB4A9A /* CarouselViewTests.swift */; };
 		AB0BEF9021F8B4C400AB4A9A /* CarouselViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BEF8F21F8B4C400AB4A9A /* CarouselViewUITests.swift */; };
 		AB0BEF9E21F8B51B00AB4A9A /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BEF9D21F8B51B00AB4A9A /* CarouselView.swift */; };
-		AB0BEFA021F8BEC700AB4A9A /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BEF9F21F8BEC700AB4A9A /* CarouselCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 		AB0BEF8F21F8B4C400AB4A9A /* CarouselViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewUITests.swift; sourceTree = "<group>"; };
 		AB0BEF9121F8B4C400AB4A9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB0BEF9D21F8B51B00AB4A9A /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
-		AB0BEF9F21F8BEC700AB4A9A /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +102,6 @@
 				AB0BEF6F21F8B4C200AB4A9A /* AppDelegate.swift */,
 				AB0BEF7121F8B4C200AB4A9A /* ViewController.swift */,
 				AB0BEF9D21F8B51B00AB4A9A /* CarouselView.swift */,
-				AB0BEF9F21F8BEC700AB4A9A /* CarouselCollectionViewCell.swift */,
 				AB0BEF7321F8B4C200AB4A9A /* Main.storyboard */,
 				AB0BEF7621F8B4C400AB4A9A /* Assets.xcassets */,
 				AB0BEF7821F8B4C400AB4A9A /* LaunchScreen.storyboard */,
@@ -262,7 +259,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB0BEFA021F8BEC700AB4A9A /* CarouselCollectionViewCell.swift in Sources */,
 				AB0BEF7221F8B4C200AB4A9A /* ViewController.swift in Sources */,
 				AB0BEF9E21F8B51B00AB4A9A /* CarouselView.swift in Sources */,
 				AB0BEF7021F8B4C200AB4A9A /* AppDelegate.swift in Sources */,

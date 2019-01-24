@@ -32,10 +32,12 @@ class CarouselView: UIView {
     fileprivate var scrollEndBlock: ((_ index: Int) -> Void)?
     fileprivate var isScrolling: Bool = false
 
-    fileprivate let scale: CGFloat // calculate width with height
+    fileprivate var scale: CGFloat // calculate width with height
     private var currentIndexPath: IndexPath
     
 
+    // MARK: lifecycle
+    
     public init(_ frame: CGRect,
                 dataSource: [String]?,
                 scrollEndCallBack: ((_ index: Int) -> Void)?) {
@@ -75,10 +77,29 @@ class CarouselView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        /// Duplicate code needs to be optimized
+        scale = frame.size.height / Constant.designItemHeight
+        currentIndexPath = IndexPath(row: 0, section: 0)
+        
+        let horizontalLayout = HorizontalFlowLayout()
+        horizontalLayout.itemSize = CGSize(width: Constant.designItemWidth * scale,
+                                           height: frame.size.height)
+        horizontalLayout.minimumLineSpacing = Constant.designItemSpace
+        
+        let rect = CGRect(origin: CGPoint.zero,
+                          size: frame.size)
+        collectionView.frame = rect
+        collectionView.collectionViewLayout = horizontalLayout
+    }
+    
+    
     // MARK: interface
     
     public func scroll(_ to: CarouselScrollDirection) {
-        guard let toIndexPath = indexPathOf(to) else {
+        guard let toIndexPath = indexPathOf(to)else {
             return
         }
         
@@ -113,6 +134,7 @@ class CarouselView: UIView {
         return currentIndexPath
     }
     
+    // should be invoked when scroll end
     private func resetCurrentIndexPath(_ scrollView: UIScrollView) {
         let scrollViewWidth = scrollView.frame.size.width
         let centerX = scrollView.contentOffset.x + scrollViewWidth * 0.5
@@ -135,6 +157,7 @@ class CarouselView: UIView {
         }
     }
     
+    /// get cell backgroundColor
     fileprivate func cellBackgoundColor(_ indexPath: IndexPath) -> UIColor {
         if isScrolling {
             return Constant.displayColor
@@ -144,6 +167,8 @@ class CarouselView: UIView {
     }
     
 }
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 
 extension CarouselView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -163,13 +188,15 @@ extension CarouselView: UICollectionViewDataSource, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         let collectionViewWidth = collectionView.frame.size.width
-        let cellWidth = collectionView.frame.size.height * scale
+        let cellWidth = Constant.designItemWidth * scale
         return UIEdgeInsets(top: 0,
                             left: (collectionViewWidth - cellWidth) * 0.5,
                             bottom: 0,
                             right: (collectionViewWidth - cellWidth) * 0.5)
     }
 }
+
+// MARK: -  UIScrollViewDelegate
 
 extension CarouselView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -214,25 +241,6 @@ class HorizontalFlowLayout: UICollectionViewFlowLayout {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-//    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-//        guard let collectionView = collectionView else {
-//                return super.layoutAttributesForElements(in: rect)
-//        }
-//
-//        let centerX = collectionView.contentOffset.x + collectionView.frame.size.width * 0.5
-//
-//        let layoutAttributes = super.layoutAttributesForElements(in: rect)
-//        for attribute in layoutAttributes ?? [] {
-//            let distance = abs(attribute.center.x - centerX)
-//            let alphaScale = distance/collectionView.frame.size.width
-//            let alpha = fabs(cos(Double(alphaScale) * Double.pi / 4))
-//
-//            attribute.transform = CGAffineTransform(scaleX: 1.0, y: CGFloat(alpha))
-//        }
-//
-//        return layoutAttributes
-//    }
     
     // stop at center point
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint,
@@ -240,7 +248,7 @@ class HorizontalFlowLayout: UICollectionViewFlowLayout {
         var offsetAdjustment = CGFloat.greatestFiniteMagnitude
         let centerX = proposedContentOffset.x + (collectionView?.bounds.width ?? 0) * 0.5
         
-        // get nearest
+        // get nearest attribute
         let targetRect = CGRect(x: proposedContentOffset.x,
                                 y: 0,
                                 width: collectionView?.bounds.width ?? 0,
@@ -257,5 +265,45 @@ class HorizontalFlowLayout: UICollectionViewFlowLayout {
         return CGPoint(x: proposedContentOffset.x + offsetAdjustment,
                        y: proposedContentOffset.y)
     }
+}
+
+// MARK: - CarouselCollectionViewCell
+
+class CarouselCollectionViewCell: UICollectionViewCell {
     
+    static let reuseIdentifier = "CarouselCollectionViewCellReuseIdentifier"
+    
+    private let label: UILabel = {
+        let label = UILabel.init()
+        label.backgroundColor = UIColor.clear
+        label.textColor = UIColor.init(white: 0.0, alpha: 0.9)
+        label.font = UIFont(name: "PingFangSC-Semibold", size: 20.0)
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        label.frame = self.bounds
+        contentView.addSubview(label)
+        
+        // round corner
+        layer.cornerRadius = 8.0
+        layer.masksToBounds = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        label.frame = self.bounds
+    }
+    
+    public func setData(_ text: String) {
+        label.text = text
+    }
 }
