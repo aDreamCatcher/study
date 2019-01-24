@@ -30,7 +30,7 @@ class CareerPathOccupationPickerView: UIView {
     fileprivate var dataSource = [String]()
     fileprivate var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: HorizontalFlowLayout())
     fileprivate var scrollEndBlock: ((_ index: Int) -> Void)?
-    fileprivate var isScrolling: Bool = false
+    fileprivate var isScrolling: Bool = false // get cellBackgoundColor with isScrolling
 
     fileprivate var scale: CGFloat = 1 // calculate width with height
     private var currentIndexPath = IndexPath(row: 0, section: 0)
@@ -38,31 +38,10 @@ class CareerPathOccupationPickerView: UIView {
     
     // MARK: lifecycle
     
-    public init(_ frame: CGRect,
-                dataSource: [String]?,
-                scrollEndCallBack: ((_ index: Int) -> Void)?) {
-        super.init(frame: frame)
-
-        scrollEndBlock = scrollEndCallBack
-        if let dataSource = dataSource {
-            self.dataSource = dataSource
-        }
-
-        setupUI()
-    }
-
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
-        setupUI()
     }
-
-    public convenience init() {
-        self.init(CGRect.zero,
-                  dataSource: nil,
-                  scrollEndCallBack: nil)
-    }
-
+    
     open override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -71,17 +50,20 @@ class CareerPathOccupationPickerView: UIView {
 
     private func setupUI() {
         backgroundColor = UIColor.clear
+        
         scale = frame.size.height / Constant.designItemHeight
-        currentIndexPath = IndexPath(row: 0, section: 0)
 
+        // create horizontal layout
         let horizontalLayout = HorizontalFlowLayout()
         horizontalLayout.itemSize = CGSize(width: Constant.designItemWidth * scale,
                                            height: frame.size.height)
         horizontalLayout.minimumLineSpacing = Constant.designItemSpace
-
+        
+        // config collectionView
+        collectionView.collectionViewLayout = horizontalLayout
         collectionView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         collectionView.showsHorizontalScrollIndicator = false
-        //collectionView.decelerationRate = .normal
+//        collectionView.decelerationRate = .normal
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(OccupationCollectionViewCell.self,
                                 forCellWithReuseIdentifier: OccupationCollectionViewCell.reuseIdentifier)
@@ -92,25 +74,6 @@ class CareerPathOccupationPickerView: UIView {
         addSubview(collectionView)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        /// Duplicate code needs to be optimized
-        scale = frame.size.height / Constant.designItemHeight
-        currentIndexPath = IndexPath(row: 0, section: 0)
-        
-        let horizontalLayout = HorizontalFlowLayout()
-        horizontalLayout.itemSize = CGSize(width: Constant.designItemWidth * scale,
-                                           height: frame.size.height)
-        horizontalLayout.minimumLineSpacing = Constant.designItemSpace
-        
-        let rect = CGRect(origin: CGPoint.zero,
-                          size: frame.size)
-        collectionView.frame = rect
-        collectionView.collectionViewLayout = horizontalLayout
-    }
-    
-    
     // MARK: interface
     
     public func scroll(_ to: OccupationScrollDirection) {
@@ -118,14 +81,29 @@ class CareerPathOccupationPickerView: UIView {
             return
         }
         
-        resetCellStyle(isScrolling: true)
-        collectionView.scrollToItem(at: toIndexPath,
-                                    at: .centeredHorizontally,
-                                    animated: true)
+        if toIndexPath.row != currentIndexPath.row {
+            resetCellStyle(isScrolling: true)
+            collectionView.scrollToItem(at: toIndexPath,
+                                        at: .centeredHorizontally,
+                                        animated: true)
+        }
     }
 
     public func setDataSource(_ theDataSource: [String], selectedIndex: Int) {
-        dataSource = theDataSource
+        if theDataSource.count > 0,
+            selectedIndex < theDataSource.count,
+            selectedIndex >= 0 {
+            // theDataSource and selectIndex valid - do this
+            dataSource = theDataSource
+            currentIndexPath = IndexPath(row: selectedIndex,
+                                         section: 0)
+            
+            DispatchQueue.main.async {
+                self.collectionView.scrollToItem(at: self.currentIndexPath,
+                                                 at: .centeredHorizontally,
+                                                 animated: false)
+            }
+        }
     }
 
     public func setScrollEndCallback(_ callback: ((_ index: Int) -> Void)?) {
@@ -142,16 +120,14 @@ class CareerPathOccupationPickerView: UIView {
         
         if direction == .last,
             currentIndexPath.row > 0{
-            currentIndexPath = IndexPath(row: currentIndexPath.row - 1,
-                                         section: currentIndexPath.section)
-            return currentIndexPath
+            return IndexPath(row: currentIndexPath.row - 1,
+                             section: currentIndexPath.section)
         }
         
         if direction == .next,
             currentIndexPath.row < (dataSource.count - 1) {
-            currentIndexPath = IndexPath(row: currentIndexPath.row + 1,
-                                         section: currentIndexPath.section)
-            return currentIndexPath
+            return IndexPath(row: currentIndexPath.row + 1,
+                             section: currentIndexPath.section)
         }
         
         return currentIndexPath
@@ -172,8 +148,12 @@ class CareerPathOccupationPickerView: UIView {
         }
     }
     
+    /// scrollTo
+    
+    
     /// reset cell backgroundStyle
     private func resetCellStyle(isScrolling: Bool) {
+        print("reset cellStyle ", isScrolling)
         self.isScrolling = isScrolling
         DispatchQueue.main.async {
             self.collectionView .reloadData()
@@ -227,25 +207,26 @@ extension CareerPathOccupationPickerView: UIScrollViewDelegate {
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("scrollViewDidEndDecelerating")
+        scrollViewDidEndScroll(scrollView)
+    }
+
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        scrollViewDidEndScroll(scrollView)
+    }
+    
+    /// should be invoked when scroll view did end scroll
+    private func scrollViewDidEndScroll(_ scrollView: UIScrollView) {
         
         resetCurrentIndexPath(scrollView)
         scrollEndCallBack()
         resetCellStyle(isScrolling: false)
     }
-
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        print("scrollViewDidEndScrollingAnimation ")
-        //
-//        resetCurrentIndexPath(scrollView)
-        scrollEndCallBack()
-        resetCellStyle(isScrolling: false)
-    }
     
-    fileprivate func scrollEndCallBack() {
+    private func scrollEndCallBack() {
         guard let scrollEndBlock = scrollEndBlock else {
             return
         }
+        
         scrollEndBlock(currentIndexPath.row)
     }
 }

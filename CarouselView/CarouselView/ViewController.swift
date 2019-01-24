@@ -25,6 +25,11 @@ class ViewController: UIViewController {
 //        carouselView.frame = CGRect(x: 0, y: 100, width: 375, height: 110)
 //        carouselView.scroll(.next)
         
+        aaaaView.setScrollEndCallback { (index) in
+            print("EndScrolllllllllll ", index)
+        }
+        aaaaView.setDataSource(["this is one", "this is two", "this is three"],
+                               selectedIndex: 1)
         
         let button = UIButton(frame: CGRect(x: 100, y: 350, width: 50, height: 50))
         button.setTitle("click", for: .normal)
@@ -34,7 +39,7 @@ class ViewController: UIViewController {
     }
 
     @objc func click() {
-//        carouselView.scroll(.next)
+        aaaaView.scroll(.next)
     }
 
 }
