@@ -27,6 +27,10 @@ class CarouselCollectionViewCell: UICollectionViewCell {
         label.frame = self.bounds
         
         contentView.addSubview(label)
+        
+        // round corner
+        layer.cornerRadius = 8.0
+        layer.masksToBounds = true
     }
 
     required init?(coder aDecoder: NSCoder) {

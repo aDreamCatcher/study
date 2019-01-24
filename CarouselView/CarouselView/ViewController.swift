@@ -9,23 +9,37 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    public let carouselView = CarouselView(CGRect(x: 0, y: 100, width: 375, height: 110),
+                                           dataSource: ["this is one", "this is two", "this is three"]) { (index) in
+                                            print("Carousel Scroll End - ", index)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        let width = view.bounds.size.width
-        let carouselView = CarouselView(CGRect(x: 0, y: 100, width: width, height: 200),
-                                        itemSize: CGSize(width: 200,
-                                                         height: 200),
-                                        itemSpace: 50,
-                                        dataSource: ["this is one", "this is two", "this is three"])
-
-        carouselView.backgroundColor = UIColor.gray
+//        let width = view.bounds.size.width
         
         view.addSubview(carouselView)
+        
+        
+        
+        
+        let button = UIButton(frame: CGRect(x: 100, y: 350, width: 50, height: 50))
+        button.setTitle("click", for: .normal)
+        button.setTitleColor(UIColor.red, for: .normal)
+        button.addTarget(self, action: #selector(click), for: .touchUpInside)
+        view.addSubview(button)
+        
+        
+        view.backgroundColor = UIColor.gray
     }
 
+    
+    @objc func click() {
+        carouselView.scroll(.next)
+    }
 
 }
 
