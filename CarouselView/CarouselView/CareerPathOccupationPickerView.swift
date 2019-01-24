@@ -1,6 +1,6 @@
 //
-//  CarouselView.swift
-//  CarouselView
+//  CareerPathOccupationPickerView.swift
+//  VoyagerFeedShell
 //
 //  Created by lgy on 2019/1/23.
 //  Copyright © 2019 lgy. All rights reserved.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-public enum CarouselScrollDirection {
+public enum OccupationScrollDirection {
     case last
     case next
 }
 
-class CarouselView: UIView {
+class CareerPathOccupationPickerView: UIView {
     
     // MARK: - constants
     private enum Constant{
@@ -28,21 +28,49 @@ class CarouselView: UIView {
     // MARK: properties
     
     fileprivate var dataSource = [String]()
-    fileprivate var collectionView: UICollectionView!
+    fileprivate var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: HorizontalFlowLayout())
     fileprivate var scrollEndBlock: ((_ index: Int) -> Void)?
     fileprivate var isScrolling: Bool = false
 
-    fileprivate var scale: CGFloat // calculate width with height
-    private var currentIndexPath: IndexPath
+    fileprivate var scale: CGFloat = 1 // calculate width with height
+    private var currentIndexPath = IndexPath(row: 0, section: 0)
     
-
+    
     // MARK: lifecycle
     
     public init(_ frame: CGRect,
                 dataSource: [String]?,
                 scrollEndCallBack: ((_ index: Int) -> Void)?) {
+        super.init(frame: frame)
+
         scrollEndBlock = scrollEndCallBack
-        
+        if let dataSource = dataSource {
+            self.dataSource = dataSource
+        }
+
+        setupUI()
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+
+        setupUI()
+    }
+
+    public convenience init() {
+        self.init(CGRect.zero,
+                  dataSource: nil,
+                  scrollEndCallBack: nil)
+    }
+
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+
+        setupUI()
+    }
+
+    private func setupUI() {
+        backgroundColor = UIColor.clear
         scale = frame.size.height / Constant.designItemHeight
         currentIndexPath = IndexPath(row: 0, section: 0)
 
@@ -51,30 +79,17 @@ class CarouselView: UIView {
                                            height: frame.size.height)
         horizontalLayout.minimumLineSpacing = Constant.designItemSpace
 
-        let rect = CGRect(origin: CGPoint.zero,
-                             size: frame.size)
-        collectionView = UICollectionView(frame: rect,
-                                          collectionViewLayout: horizontalLayout)
+        collectionView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.decelerationRate = .normal
+        //collectionView.decelerationRate = .normal
         collectionView.backgroundColor = UIColor.clear
-        collectionView.register(CarouselCollectionViewCell.self,
-                                forCellWithReuseIdentifier: CarouselCollectionViewCell.reuseIdentifier)
-
-        super.init(frame: frame)
+        collectionView.register(OccupationCollectionViewCell.self,
+                                forCellWithReuseIdentifier: OccupationCollectionViewCell.reuseIdentifier)
 
         collectionView.dataSource = self
         collectionView.delegate = self
 
-        if let dataSource = dataSource {
-            self.dataSource = dataSource
-        }
-
         addSubview(collectionView)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
@@ -82,7 +97,7 @@ class CarouselView: UIView {
         
         /// Duplicate code needs to be optimized
         scale = frame.size.height / Constant.designItemHeight
-//        currentIndexPath = IndexPath(row: 0, section: 0)
+        currentIndexPath = IndexPath(row: 0, section: 0)
         
         let horizontalLayout = HorizontalFlowLayout()
         horizontalLayout.itemSize = CGSize(width: Constant.designItemWidth * scale,
@@ -98,37 +113,45 @@ class CarouselView: UIView {
     
     // MARK: interface
     
-    public func scroll(_ to: CarouselScrollDirection) {
+    public func scroll(_ to: OccupationScrollDirection) {
         guard let toIndexPath = indexPathOf(to)else {
             return
         }
         
-        if toIndexPath.row != currentIndexPath.row {
-            resetCellStyle(isScrolling: true)
-            collectionView.scrollToItem(at: toIndexPath,
-                                        at: .centeredHorizontally,
-                                        animated: true)
-        }
+        resetCellStyle(isScrolling: true)
+        collectionView.scrollToItem(at: toIndexPath,
+                                    at: .centeredHorizontally,
+                                    animated: true)
+    }
+
+    public func setDataSource(_ theDataSource: [String], selectedIndex: Int) {
+        dataSource = theDataSource
+    }
+
+    public func setScrollEndCallback(_ callback: ((_ index: Int) -> Void)?) {
+        scrollEndBlock = callback
     }
     
     // MARK: private methods
     
     /// calculate destination indexPath
-    fileprivate func indexPathOf(_ direction: CarouselScrollDirection) -> IndexPath? {
+    fileprivate func indexPathOf(_ direction: OccupationScrollDirection) -> IndexPath? {
         guard dataSource.count > 0 else {
             return nil
         }
         
         if direction == .last,
             currentIndexPath.row > 0{
-            return IndexPath(row: currentIndexPath.row - 1,
-                             section: currentIndexPath.section)
+            currentIndexPath = IndexPath(row: currentIndexPath.row - 1,
+                                         section: currentIndexPath.section)
+            return currentIndexPath
         }
         
         if direction == .next,
             currentIndexPath.row < (dataSource.count - 1) {
-            return IndexPath(row: currentIndexPath.row + 1,
-                             section: currentIndexPath.section)
+            currentIndexPath = IndexPath(row: currentIndexPath.row + 1,
+                                         section: currentIndexPath.section)
+            return currentIndexPath
         }
         
         return currentIndexPath
@@ -170,14 +193,14 @@ class CarouselView: UIView {
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 
-extension CarouselView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension CareerPathOccupationPickerView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCollectionViewCell.reuseIdentifier,
-                                                      for: indexPath) as! CarouselCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OccupationCollectionViewCell.reuseIdentifier,
+                                                      for: indexPath) as! OccupationCollectionViewCell
         
         cell.setData(dataSource[indexPath.row])
         cell.backgroundColor = cellBackgoundColor(indexPath)
@@ -198,7 +221,7 @@ extension CarouselView: UICollectionViewDataSource, UICollectionViewDelegate, UI
 
 // MARK: -  UIScrollViewDelegate
 
-extension CarouselView: UIScrollViewDelegate {
+extension CareerPathOccupationPickerView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         resetCellStyle(isScrolling: true)
     }
@@ -214,7 +237,7 @@ extension CarouselView: UIScrollViewDelegate {
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         print("scrollViewDidEndScrollingAnimation ")
         //
-        resetCurrentIndexPath(scrollView)
+//        resetCurrentIndexPath(scrollView)
         scrollEndCallBack()
         resetCellStyle(isScrolling: false)
     }
@@ -267,11 +290,11 @@ class HorizontalFlowLayout: UICollectionViewFlowLayout {
     }
 }
 
-// MARK: - CarouselCollectionViewCell
+// MARK: - OccupationCollectionViewCell
 
-class CarouselCollectionViewCell: UICollectionViewCell {
+class OccupationCollectionViewCell: UICollectionViewCell {
     
-    static let reuseIdentifier = "CarouselCollectionViewCellReuseIdentifier"
+    static let reuseIdentifier = "OccupationCollectionViewCellReuseIdentifier"
     
     private let label: UILabel = {
         let label = UILabel.init()
