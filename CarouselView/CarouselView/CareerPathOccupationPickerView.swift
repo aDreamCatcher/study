@@ -229,7 +229,7 @@ extension CareerPathOccupationPickerView: UIScrollViewDelegate {
         guard let scrollEndBlock = scrollEndBlock else {
             return
         }
-        
+        // TODO: if lastIndexPath == currentIndexPath, dont callBack - do it?
         scrollEndBlock(currentIndexPath.row)
     }
 }
