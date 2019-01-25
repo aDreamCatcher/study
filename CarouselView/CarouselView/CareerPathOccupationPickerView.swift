@@ -14,30 +14,37 @@ public enum OccupationScrollDirection {
 }
 
 class CareerPathOccupationPickerView: UIView {
-    
-    // MARK: constants
-    private enum Constant{
-        static let designItemWidth: CGFloat = 295.0 // itemWidth = designItemWidth * scale
-        static let designItemHeight: CGFloat = 110.0 // scale = frame.size.height / designItemHeight
-        static let designItemSpace: CGFloat = 16.0 // no scale
-        
+
+    // MARK: - constants
+
+    fileprivate enum Constant{
+        // itemWidth = designItemWidth * scale
+        static let designItemWidth: CGFloat = 295.0
+        // scale = frame.size.height / designItemHeight
+        static let designItemHeight: CGFloat = 110.0
+        // no scale
+        static let designItemSpace: CGFloat = 16.0
+
+        static let backgroundColor = UIColor.clear
         static let displayColor = UIColor.white
-        static let blurColor = UIColor.init(white: 1.0, alpha: 0.5)
+        static let blurColor = UIColor(white: 1.0, alpha: 0.5)
     }
     
-    // MARK: properties
+    // MARK: - properties
     
     private var dataSource = [String]()
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: HorizontalFlowLayout())
     private var scrollEndBlock: ((_ index: Int) -> Void)?
-    private var isScrolling: Bool = false // get cellBackgoundColor with isScrolling
+    // get cellBackgoundColor with isScrolling
+    private var isScrolling: Bool = false
 
-    private var scale: CGFloat = 1 // calculate width with height
+    // calculate width with height
+    private var scale: CGFloat = 1
     private var currentIndexPath = IndexPath(row: 0, section: 0)
     private var lastCallbackIndexPath: IndexPath?
     
     
-    // MARK: lifecycle
+    // MARK: - lifecycle
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -68,7 +75,7 @@ class CareerPathOccupationPickerView: UIView {
     }
 
     private func setupUI() {
-        backgroundColor = UIColor.clear
+        backgroundColor = Constant.backgroundColor
         
         scale = frame.size.height / Constant.designItemHeight
 
@@ -82,9 +89,9 @@ class CareerPathOccupationPickerView: UIView {
         // config collectionView
         collectionView.collectionViewLayout = horizontalLayout
         collectionView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
-        collectionView.decelerationRate = UIScrollViewDecelerationRateNormal
+        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = UIColor.clear
+        collectionView.backgroundColor = Constant.backgroundColor
         collectionView.register(OccupationCollectionViewCell.self,
                                 forCellWithReuseIdentifier: OccupationCollectionViewCell.reuseIdentifier)
 
@@ -94,7 +101,7 @@ class CareerPathOccupationPickerView: UIView {
         addSubview(collectionView)
     }
     
-    // MARK: interface
+    // MARK: - interface
     // scroll to last/next item
     public func scroll(_ to: OccupationScrollDirection) {
         guard let toIndexPath = indexPathOf(to)else {
@@ -131,7 +138,7 @@ class CareerPathOccupationPickerView: UIView {
         scrollEndBlock = callback
     }
     
-    // MARK: private methods
+    // MARK: - private methods
     
     // calculate destination indexPath
     private func indexPathOf(_ direction: OccupationScrollDirection) -> IndexPath? {
@@ -185,7 +192,7 @@ class CareerPathOccupationPickerView: UIView {
         }
     }
     
-    /// get cell backgroundColor
+    // get cell backgroundColor
     private func cellBackgoundColor(_ indexPath: IndexPath) -> UIColor {
         if isScrolling {
             return Constant.displayColor
@@ -270,7 +277,6 @@ class HorizontalFlowLayout: UICollectionViewFlowLayout {
 
     public override init() {
         super.init()
-
         self.scrollDirection = .horizontal
     }
 
@@ -309,12 +315,20 @@ class OccupationCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "OccupationCollectionViewCellReuseIdentifier"
     
+    fileprivate enum Constant {
+        static let backgroundColor = UIColor.clear
+        static let textColor = UIColor(white: 0.0, alpha: 0.9)
+        static let textFont = UIFont.systemFont(ofSize: 20.0)
+        static let textAlignment = NSTextAlignment.center
+        static let cornerRadius: CGFloat = 8.0
+    }
+    
     private let label: UILabel = {
         let label = UILabel.init()
-        label.backgroundColor = UIColor.clear
-        label.textColor = UIColor.init(white: 0.0, alpha: 0.9)
-        label.font = UIFont(name: "PingFangSC-Semibold", size: 20.0)
-        label.textAlignment = .center
+        label.backgroundColor = Constant.backgroundColor
+        label.textColor = Constant.textColor
+        label.font = Constant.textFont
+        label.textAlignment = Constant.textAlignment
         
         return label
     }()
@@ -326,7 +340,7 @@ class OccupationCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(label)
         
         // round corner
-        layer.cornerRadius = 8.0
+        layer.cornerRadius = Constant.cornerRadius
         layer.masksToBounds = true
     }
     
