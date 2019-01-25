@@ -157,12 +157,11 @@ class CareerPathOccupationPickerView: UIView {
         let scrollViewWidth = scrollView.frame.size.width
         let centerX = scrollView.contentOffset.x + scrollViewWidth * 0.5
         
-        
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let cellWidth = layout.itemSize.width
         let cellOccupiedWidth = cellWidth + Constant.designItemSpace
         let leftEdge = (scrollViewWidth - cellWidth) * 0.5
-        
+        // get current item's index
         for index in 0..<dataSource.count {
             let cellOriginX = leftEdge + CGFloat(index) * cellOccupiedWidth
             let cellEndX = cellOriginX + cellWidth
