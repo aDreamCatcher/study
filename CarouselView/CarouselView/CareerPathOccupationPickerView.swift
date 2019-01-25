@@ -286,7 +286,7 @@ extension CareerPathOccupationPickerView: UIScrollViewDelegate {
     }
 
     // auto scroll to nearby item/cell's private methods
-    // get nearby item/cell's offset-x with velocity
+    // get nearby item/cell's offset-x with velocity, velocity.x must not be 0.0;
     private func offsetOfNearbyItem(withVelocity velocity: CGPoint) -> CGFloat {
         let direction: OccupationScrollDirection = (velocity.x < 0) ? .last : .next
         let targetIndexPath = nearbyIndexPath(direction)
