@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="Zai-pb-4Za" customClass="CareerPathOccupationPickerView" customModule="CarouselView" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="479" width="375" height="62"/>
+                            <view contentMode="scaleToFill" misplaced="YES" id="Zai-pb-4Za" customClass="CareerPathOccupationPickerView" customModule="CarouselView" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="248" width="375" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -31,7 +31,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-154.5" y="-2.4999999999999996"/>
+            <point key="canvasLocation" x="-154.5" y="-2.5"/>
         </scene>
     </scenes>
 </document>
