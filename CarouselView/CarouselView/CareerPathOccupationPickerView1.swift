@@ -1,8 +1,8 @@
 //
 //  CareerPathOccupationPickerView.swift
-//  CarouselView
+//  VoyagerFeedShell
 //
-//  Created by Guiyang Li on 2019/1/25.
+//  Created by lgy on 2019/1/23.
 //  Copyright © 2019 lgy. All rights reserved.
 //
 
@@ -29,9 +29,9 @@ class CareerPathOccupationPickerView: UIView {
         static let displayColor = UIColor.white
         static let blurColor = UIColor(white: 1.0, alpha: 0.5)
     }
-
+    
     // MARK: - properties
-
+    
     private var dataSource = [String]()
     private var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: HorizontalFlowLayout())
     private var scrollEndBlock: ((_ index: Int) -> Void)?
@@ -42,20 +42,20 @@ class CareerPathOccupationPickerView: UIView {
     private var scale: CGFloat = 1
     private var currentIndexPath = IndexPath(row: 0, section: 0)
     private var lastCallbackIndexPath: IndexPath?
-
-
+    
+    
     // MARK: - lifecycle
-
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     open override func awakeFromNib() {
         super.awakeFromNib()
 
         setupUI()
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -76,7 +76,7 @@ class CareerPathOccupationPickerView: UIView {
 
     private func setupUI() {
         backgroundColor = Constant.backgroundColor
-
+        
         scale = frame.size.height / Constant.designItemHeight
 
         // create horizontal layout
@@ -85,7 +85,7 @@ class CareerPathOccupationPickerView: UIView {
                                            height: frame.size.height)
         horizontalLayout.minimumLineSpacing = Constant.designItemSpace
         horizontalLayout.minimumInteritemSpacing = Constant.designItemSpace
-
+        
         // config collectionView
         collectionView.collectionViewLayout = horizontalLayout
         collectionView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
@@ -100,14 +100,14 @@ class CareerPathOccupationPickerView: UIView {
 
         addSubview(collectionView)
     }
-
+    
     // MARK: - interface
     // scroll to last/next item
     public func scroll(_ to: OccupationScrollDirection) {
         guard let toIndexPath = indexPathOf(to)else {
             return
         }
-
+        
         if toIndexPath.row != currentIndexPath.row {
             resetCellStyle(isScrolling: true)
             collectionView.scrollToItem(at: toIndexPath,
@@ -125,7 +125,7 @@ class CareerPathOccupationPickerView: UIView {
             dataSource = theDataSource
             currentIndexPath = IndexPath(row: selectedIndex,
                                          section: 0)
-
+            
             DispatchQueue.main.async {
                 self.collectionView.scrollToItem(at: self.currentIndexPath,
                                                  at: .centeredHorizontally,
@@ -137,35 +137,35 @@ class CareerPathOccupationPickerView: UIView {
     public func setScrollEndCallback(_ callback: ((_ index: Int) -> Void)?) {
         scrollEndBlock = callback
     }
-
+    
     // MARK: - private methods
-
+    
     // calculate destination indexPath
     private func indexPathOf(_ direction: OccupationScrollDirection) -> IndexPath? {
         guard dataSource.count > 0 else {
             return nil
         }
-
+        
         if direction == .last,
             currentIndexPath.row > 0{
             return IndexPath(row: currentIndexPath.row - 1,
                              section: currentIndexPath.section)
         }
-
+        
         if direction == .next,
             currentIndexPath.row < (dataSource.count - 1) {
             return IndexPath(row: currentIndexPath.row + 1,
                              section: currentIndexPath.section)
         }
-
+        
         return currentIndexPath
     }
-
+    
     // should be invoked when scroll end
     private func resetCurrentIndexPath(_ scrollView: UIScrollView) {
         let scrollViewWidth = scrollView.frame.size.width
         let centerX = scrollView.contentOffset.x + scrollViewWidth * 0.5
-
+        
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let cellWidth = layout.itemSize.width
         let cellOccupiedWidth = cellWidth + Constant.designItemSpace
@@ -174,7 +174,7 @@ class CareerPathOccupationPickerView: UIView {
         for index in 0..<dataSource.count {
             let cellOriginX = leftEdge + CGFloat(index) * cellOccupiedWidth
             let cellEndX = cellOriginX + cellWidth
-
+            
             let isCellCenter = (centerX > cellOriginX) && (centerX < cellEndX)
             if isCellCenter {
                 currentIndexPath = IndexPath(row: index,
@@ -183,7 +183,7 @@ class CareerPathOccupationPickerView: UIView {
             }
         }
     }
-
+    
     // reset cell backgroundStyle
     private func resetCellStyle(isScrolling: Bool) {
         self.isScrolling = isScrolling
@@ -191,16 +191,16 @@ class CareerPathOccupationPickerView: UIView {
             self.collectionView .reloadData()
         }
     }
-
+    
     // get cell backgroundColor
     private func cellBackgoundColor(_ indexPath: IndexPath) -> UIColor {
         if isScrolling {
             return Constant.displayColor
         }
-
+        
         return (indexPath.row == currentIndexPath.row) ? Constant.displayColor : Constant.blurColor;
     }
-
+    
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
@@ -213,13 +213,13 @@ extension CareerPathOccupationPickerView: UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OccupationCollectionViewCell.reuseIdentifier,
                                                       for: indexPath) as! OccupationCollectionViewCell
-
+        
         cell.setData(dataSource[indexPath.row])
         cell.backgroundColor = cellBackgoundColor(indexPath)
 
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let collectionViewWidth = collectionView.frame.size.width
         let cellWidth = Constant.designItemWidth * scale
@@ -239,7 +239,7 @@ extension CareerPathOccupationPickerView: UIScrollViewDelegate {
             return
         }
     }
-
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         scrollViewDidEndScroll(scrollView)
     }
@@ -247,16 +247,16 @@ extension CareerPathOccupationPickerView: UIScrollViewDelegate {
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         scrollViewDidEndScroll(scrollView)
     }
-
+    
     // should be invoked when scroll view did end scroll
     private func scrollViewDidEndScroll(_ scrollView: UIScrollView) {
-
+        
         resetCurrentIndexPath(scrollView)
         resetCellStyle(isScrolling: false)
-
+        
         scrollEndCallBack()
     }
-
+    
     private func scrollEndCallBack() {
         guard let scrollEndBlock = scrollEndBlock else {
             return
@@ -283,13 +283,13 @@ class HorizontalFlowLayout: UICollectionViewFlowLayout {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // stop at center point
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint,
                                       withScrollingVelocity velocity: CGPoint) -> CGPoint {
         var offsetAdjustment = CGFloat.greatestFiniteMagnitude
         let centerX = proposedContentOffset.x + (collectionView?.bounds.width ?? 0) * 0.5
-
+        
         // get nearest attribute
         let targetRect = CGRect(x: proposedContentOffset.x,
                                 y: 0,
@@ -312,9 +312,9 @@ class HorizontalFlowLayout: UICollectionViewFlowLayout {
 // MARK: - OccupationCollectionViewCell
 
 class OccupationCollectionViewCell: UICollectionViewCell {
-
+    
     static let reuseIdentifier = "OccupationCollectionViewCellReuseIdentifier"
-
+    
     fileprivate enum Constant {
         static let backgroundColor = UIColor.clear
         static let textColor = UIColor(white: 0.0, alpha: 0.9)
@@ -322,37 +322,37 @@ class OccupationCollectionViewCell: UICollectionViewCell {
         static let textAlignment = NSTextAlignment.center
         static let cornerRadius: CGFloat = 8.0
     }
-
+    
     private let label: UILabel = {
         let label = UILabel.init()
         label.backgroundColor = Constant.backgroundColor
         label.textColor = Constant.textColor
         label.font = Constant.textFont
         label.textAlignment = Constant.textAlignment
-
+        
         return label
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         label.frame = self.bounds
         contentView.addSubview(label)
-
+        
         // round corner
         layer.cornerRadius = Constant.cornerRadius
         layer.masksToBounds = true
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         label.frame = self.bounds
     }
-
+    
     public func setData(_ text: String) {
         label.text = text
     }

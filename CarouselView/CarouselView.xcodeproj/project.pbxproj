@@ -14,7 +14,7 @@
 		AB0BEF7A21F8B4C400AB4A9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB0BEF7821F8B4C400AB4A9A /* LaunchScreen.storyboard */; };
 		AB0BEF8521F8B4C400AB4A9A /* CarouselViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BEF8421F8B4C400AB4A9A /* CarouselViewTests.swift */; };
 		AB0BEF9021F8B4C400AB4A9A /* CarouselViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0BEF8F21F8B4C400AB4A9A /* CarouselViewUITests.swift */; };
-		ACFB0EF821F9D10000C1FB29 /* CareerPathOccupationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFB0EF721F9D10000C1FB29 /* CareerPathOccupationPickerView.swift */; };
+		ACB3092D21FAF134002C97A5 /* CareerPathOccupationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB3092C21FAF134002C97A5 /* CareerPathOccupationPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +48,7 @@
 		AB0BEF8B21F8B4C400AB4A9A /* CarouselViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarouselViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0BEF8F21F8B4C400AB4A9A /* CarouselViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewUITests.swift; sourceTree = "<group>"; };
 		AB0BEF9121F8B4C400AB4A9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ACFB0EF721F9D10000C1FB29 /* CareerPathOccupationPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareerPathOccupationPickerView.swift; sourceTree = "<group>"; };
+		ACB3092C21FAF134002C97A5 /* CareerPathOccupationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPathOccupationPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +101,11 @@
 			children = (
 				AB0BEF6F21F8B4C200AB4A9A /* AppDelegate.swift */,
 				AB0BEF7121F8B4C200AB4A9A /* ViewController.swift */,
-				ACFB0EF721F9D10000C1FB29 /* CareerPathOccupationPickerView.swift */,
 				AB0BEF7321F8B4C200AB4A9A /* Main.storyboard */,
 				AB0BEF7621F8B4C400AB4A9A /* Assets.xcassets */,
 				AB0BEF7821F8B4C400AB4A9A /* LaunchScreen.storyboard */,
 				AB0BEF7B21F8B4C400AB4A9A /* Info.plist */,
+				ACB3092C21FAF134002C97A5 /* CareerPathOccupationPickerView.swift */,
 			);
 			path = CarouselView;
 			sourceTree = "<group>";
@@ -259,7 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACFB0EF821F9D10000C1FB29 /* CareerPathOccupationPickerView.swift in Sources */,
+				ACB3092D21FAF134002C97A5 /* CareerPathOccupationPickerView.swift in Sources */,
 				AB0BEF7221F8B4C200AB4A9A /* ViewController.swift in Sources */,
 				AB0BEF7021F8B4C200AB4A9A /* AppDelegate.swift in Sources */,
 			);
