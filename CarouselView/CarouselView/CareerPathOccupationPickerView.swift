@@ -203,7 +203,10 @@ extension CareerPathOccupationPickerView: UICollectionViewDataSource, UICollecti
 
 extension CareerPathOccupationPickerView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        resetCellStyle(isScrolling: true)
+        guard isScrolling else {
+            resetCellStyle(isScrolling: true)
+            return
+        }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
