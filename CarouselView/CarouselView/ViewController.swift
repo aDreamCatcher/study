@@ -26,7 +26,7 @@ class ViewController: UIViewController {
 //        carouselView.scroll(.next)
         
         aaaaView.setScrollEndCallback { (index) in
-            print("EndScrolllllllllll ", index)
+            print("--------------------------------- ", index)
         }
         aaaaView.setDataSource(["this is one", "this is two", "this is three"],
                                selectedIndex: 1)

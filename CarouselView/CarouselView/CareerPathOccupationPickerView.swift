@@ -48,9 +48,26 @@ class CareerPathOccupationPickerView: UIView {
 
         setupUI()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        scale = frame.size.height / Constant.designItemHeight
+        
+        // create horizontal layout
+        let horizontalLayout = HorizontalFlowLayout()
+        horizontalLayout.itemSize = CGSize(width: Constant.designItemWidth * scale,
+                                           height: frame.size.height)
+        horizontalLayout.minimumLineSpacing = Constant.designItemSpace
+        
+        // config collectionView
+        collectionView.collectionViewLayout = horizontalLayout
+        collectionView.frame = CGRect(origin: .zero,
+                                      size: frame.size)
+    }
 
     private func setupUI() {
-        backgroundColor = UIColor.clear
+        backgroundColor = UIColor.yellow
         
         scale = frame.size.height / Constant.designItemHeight
 
@@ -65,7 +82,7 @@ class CareerPathOccupationPickerView: UIView {
         collectionView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = UIScrollViewDecelerationRateNormal
-        collectionView.backgroundColor = UIColor.clear
+        collectionView.backgroundColor = UIColor.red
         collectionView.register(OccupationCollectionViewCell.self,
                                 forCellWithReuseIdentifier: OccupationCollectionViewCell.reuseIdentifier)
 
@@ -139,18 +156,22 @@ class CareerPathOccupationPickerView: UIView {
         let scrollViewWidth = scrollView.frame.size.width
         let centerX = scrollView.contentOffset.x + scrollViewWidth * 0.5
         
+        let cellWidth = Constant.designItemWidth * scale
+        let leftSpace = (scrollViewWidth - cellWidth) * 0.5
+        let cellOccupiedWidth = cellWidth + Constant.designItemSpace
+        
         for index in 0..<dataSource.count {
-            let isThisIndex = (centerX > CGFloat(index) * scrollViewWidth) && (centerX < CGFloat(index+1) * scrollViewWidth)
-            if isThisIndex {
+            let cellOriginX = leftSpace + CGFloat(index) * cellOccupiedWidth
+            let cellEndX = cellOriginX + cellWidth
+            
+            let isCellCenter = (centerX > cellOriginX) && (centerX < cellEndX)
+            if isCellCenter {
                 currentIndexPath = IndexPath(row: index,
                                              section: currentIndexPath.section)
                 break
             }
         }
     }
-    
-    /// scrollTo
-    
     
     /// reset cell backgroundStyle
     private func resetCellStyle(isScrolling: Bool) {
@@ -222,8 +243,9 @@ extension CareerPathOccupationPickerView: UIScrollViewDelegate {
     private func scrollViewDidEndScroll(_ scrollView: UIScrollView) {
         
         resetCurrentIndexPath(scrollView)
-        scrollEndCallBack()
         resetCellStyle(isScrolling: false)
+        
+        scrollEndCallBack()
     }
     
     private func scrollEndCallBack() {
