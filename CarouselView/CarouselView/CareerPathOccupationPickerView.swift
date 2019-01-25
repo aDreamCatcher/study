@@ -51,15 +51,15 @@ class CareerPathOccupationPickerView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         scale = frame.size.height / Constant.designItemHeight
-        
+
         // create horizontal layout
         let horizontalLayout = HorizontalFlowLayout()
         horizontalLayout.itemSize = CGSize(width: Constant.designItemWidth * scale,
                                            height: frame.size.height)
         horizontalLayout.minimumLineSpacing = Constant.designItemSpace
-        
+
         // config collectionView
         collectionView.collectionViewLayout = horizontalLayout
         collectionView.frame = CGRect(origin: .zero,
@@ -67,7 +67,7 @@ class CareerPathOccupationPickerView: UIView {
     }
 
     private func setupUI() {
-        backgroundColor = UIColor.yellow
+        backgroundColor = UIColor.clear
         
         scale = frame.size.height / Constant.designItemHeight
 
@@ -82,7 +82,7 @@ class CareerPathOccupationPickerView: UIView {
         collectionView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = UIScrollViewDecelerationRateNormal
-        collectionView.backgroundColor = UIColor.red
+        collectionView.backgroundColor = UIColor.clear
         collectionView.register(OccupationCollectionViewCell.self,
                                 forCellWithReuseIdentifier: OccupationCollectionViewCell.reuseIdentifier)
 
