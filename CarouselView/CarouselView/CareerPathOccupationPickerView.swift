@@ -34,6 +34,7 @@ class CareerPathOccupationPickerView: UIView {
 
     fileprivate var scale: CGFloat = 1 // calculate width with height
     private var currentIndexPath = IndexPath(row: 0, section: 0)
+    private var lastCallbackIndexPath: IndexPath?
     
     
     // MARK: lifecycle
@@ -63,7 +64,7 @@ class CareerPathOccupationPickerView: UIView {
         collectionView.collectionViewLayout = horizontalLayout
         collectionView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         collectionView.showsHorizontalScrollIndicator = false
-//        collectionView.decelerationRate = .normal
+        collectionView.decelerationRate = UIScrollView.DecelerationRate.normal
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(OccupationCollectionViewCell.self,
                                 forCellWithReuseIdentifier: OccupationCollectionViewCell.reuseIdentifier)
@@ -229,8 +230,12 @@ extension CareerPathOccupationPickerView: UIScrollViewDelegate {
         guard let scrollEndBlock = scrollEndBlock else {
             return
         }
-        // TODO: if lastIndexPath == currentIndexPath, dont callBack - do it?
-        scrollEndBlock(currentIndexPath.row)
+        /// if lastIndexPath != currentIndexPath, do callBack
+        if lastCallbackIndexPath == nil ||
+            lastCallbackIndexPath?.row != currentIndexPath.row {
+            lastCallbackIndexPath = currentIndexPath
+            scrollEndBlock(currentIndexPath.row)
+        }
     }
 }
 
