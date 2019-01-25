@@ -24,6 +24,9 @@ class CareerPathOccupationPickerView: UIView {
         static let designItemHeight: CGFloat = 110.0
         // no scale
         static let designItemSpace: CGFloat = 16.0
+        // scroll view's velocity >= velocity: scroll to currentIndexPath's nearby item/cell
+        // scroll view's velocity <  velocigy: scroll to proposedContentOffset's nearby item/cell
+        static let velocity: CGFloat = 0.35
 
         static let backgroundColor = UIColor.clear
         static let displayColor = UIColor.white
@@ -203,9 +206,9 @@ class CareerPathOccupationPickerView: UIView {
 
 }
 
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 
-extension CareerPathOccupationPickerView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension CareerPathOccupationPickerView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -240,6 +243,18 @@ extension CareerPathOccupationPickerView: UIScrollViewDelegate {
         }
     }
 
+    // auto scroll to nearby item/cell
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                   withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if fabs(velocity.x) >= Constant.velocity {
+            print("scrollViewWillEndDragging velocity: ", velocity.x)
+            let offsetX = offsetOfNearbyItem(withVelocity: velocity)
+            targetContentOffset.pointee = CGPoint(x: offsetX, y: 0)
+            print("scrollViewWillEndDragging offsetX: ", offsetX)
+        }
+    }
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         scrollViewDidEndScroll(scrollView)
     }
@@ -248,6 +263,7 @@ extension CareerPathOccupationPickerView: UIScrollViewDelegate {
         scrollViewDidEndScroll(scrollView)
     }
 
+    // MARK: private methods
     // should be invoked when scroll view did end scroll
     private func scrollViewDidEndScroll(_ scrollView: UIScrollView) {
 
@@ -268,6 +284,46 @@ extension CareerPathOccupationPickerView: UIScrollViewDelegate {
             scrollEndBlock(currentIndexPath.row)
         }
     }
+
+    // auto scroll to nearby item/cell's private methods
+    // get nearby item/cell's offset-x with velocity
+    private func offsetOfNearbyItem(withVelocity velocity: CGPoint) -> CGFloat {
+        let direction: OccupationScrollDirection = (velocity.x < 0) ? .last : .next
+        let targetIndexPath = nearbyIndexPath(direction)
+        let offsetX = offsetAtIndexPath(targetIndexPath)
+
+        return offsetX
+    }
+
+    // get nearby indexPath with OccupationScrollDirection
+    private func nearbyIndexPath(_ direction: OccupationScrollDirection) -> IndexPath {
+        if direction == .last,
+            currentIndexPath.row > 0{
+            return IndexPath(row: currentIndexPath.row - 1,
+                             section: currentIndexPath.section)
+        }
+
+        if direction == .next,
+            currentIndexPath.row < dataSource.count - 1{
+            return IndexPath(row: currentIndexPath.row + 1,
+                             section: currentIndexPath.section)
+        }
+
+        return currentIndexPath
+    }
+
+    // get nearby item/cell's offset-x with IndexPath
+    private func offsetAtIndexPath(_ indexPath: IndexPath) -> CGFloat {
+        let collectionViewWidth = collectionView.frame.size.width
+        let viewLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let itemWidth = viewLayout.itemSize.width
+        let itemOccupiedWidth = itemWidth + viewLayout.minimumLineSpacing
+        let leftEdge = (collectionView.frame.size.width - itemWidth) * 0.5
+
+        let itemCenterX = leftEdge + itemOccupiedWidth * CGFloat(indexPath.row) + itemWidth * 0.5
+
+        return itemCenterX - collectionViewWidth * 0.5
+    }
 }
 
 
@@ -287,25 +343,30 @@ class HorizontalFlowLayout: UICollectionViewFlowLayout {
     // stop at center point
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint,
                                       withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        var offsetAdjustment = CGFloat.greatestFiniteMagnitude
-        let centerX = proposedContentOffset.x + (collectionView?.bounds.width ?? 0) * 0.5
+        // if velocity.x < Constant.velocity, goto proposeContentOffset's nearby item
+        if fabs(velocity.x) < CareerPathOccupationPickerView.Constant.velocity {
+            var offsetAdjustment = CGFloat.greatestFiniteMagnitude
+            let centerX = proposedContentOffset.x + (collectionView?.bounds.width ?? 0) * 0.5
 
-        // get nearest attribute
-        let targetRect = CGRect(x: proposedContentOffset.x,
-                                y: 0,
-                                width: collectionView?.bounds.width ?? 0,
-                                height: collectionView?.bounds.height ?? 0)
-        let attributes = super.layoutAttributesForElements(in: targetRect)
-        for layoutAttribute in attributes ?? [] {
-            let itemCenterX = layoutAttribute.center.x
+            // get nearest attribute
+            let targetRect = CGRect(x: proposedContentOffset.x,
+                                    y: 0,
+                                    width: collectionView?.bounds.width ?? 0,
+                                    height: collectionView?.bounds.height ?? 0)
+            let attributes = super.layoutAttributesForElements(in: targetRect)
+            for layoutAttribute in attributes ?? [] {
+                let itemCenterX = layoutAttribute.center.x
 
-            if abs(itemCenterX - centerX) < abs(offsetAdjustment) {
-                offsetAdjustment = itemCenterX - centerX
+                if abs(itemCenterX - centerX) < abs(offsetAdjustment) {
+                    offsetAdjustment = itemCenterX - centerX
+                }
             }
+
+            return CGPoint(x: proposedContentOffset.x + offsetAdjustment,
+                           y: proposedContentOffset.y)
         }
 
-        return CGPoint(x: proposedContentOffset.x + offsetAdjustment,
-                       y: proposedContentOffset.y)
+        return proposedContentOffset
     }
 }
 
