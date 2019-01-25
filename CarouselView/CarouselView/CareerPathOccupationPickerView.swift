@@ -59,6 +59,7 @@ class CareerPathOccupationPickerView: UIView {
         horizontalLayout.itemSize = CGSize(width: Constant.designItemWidth * scale,
                                            height: frame.size.height)
         horizontalLayout.minimumLineSpacing = Constant.designItemSpace
+        horizontalLayout.minimumInteritemSpacing = Constant.designItemSpace
 
         // config collectionView
         collectionView.collectionViewLayout = horizontalLayout
@@ -76,6 +77,7 @@ class CareerPathOccupationPickerView: UIView {
         horizontalLayout.itemSize = CGSize(width: Constant.designItemWidth * scale,
                                            height: frame.size.height)
         horizontalLayout.minimumLineSpacing = Constant.designItemSpace
+        horizontalLayout.minimumInteritemSpacing = Constant.designItemSpace
         
         // config collectionView
         collectionView.collectionViewLayout = horizontalLayout
