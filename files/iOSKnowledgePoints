@@ -1,0 +1,19 @@
+### UIScroll
+* open var scrollsToTop: Bool // default is YES.
+
+	// When the user taps the status bar, the scroll view beneath the touch which is closest to the status bar will be scrolled to top, but only if its `scrollsToTop` property is YES, its delegate does not return NO from `-scrollViewShouldScrollToTop:`, and it is not already at the top.
+	
+	// On iPhone, we execute this gesture only if there's one on-screen scroll view with `scrollsToTop` == YES. If more than one is found, none will be scrolled.
+
+
+### CIContext
+* public init(eaglContext: EAGLContext, options: [CIContextOption : Any]? = nil)
+ 
+ * parameter options value:
+ 		* nil and [kCIContextWorkingColorSpace: NSNull()] are different meaning/result.
+ 			* kCIContextWorkingColorSpace
+ 		
+ 				A key for the color space to use for image operations.
+ 				more see 'Developer documentation'
+ 		
+
