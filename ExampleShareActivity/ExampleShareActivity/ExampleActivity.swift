@@ -31,9 +31,9 @@ extension ExampleActivity {
         return Category.share
     }
 
-    override var activityType: UIActivity.ActivityType? {
-        return ActivityType(rawValue: "com.tencent.xin.sharetimeline");
-    }
+//    override var activityType: UIActivity.ActivityType? {
+//        return ActivityType(rawValue: "com.tencent.xin.sharetimeline");
+//    }
 
     override var activityTitle: String? {
         return title
