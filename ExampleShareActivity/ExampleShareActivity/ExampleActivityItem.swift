@@ -63,9 +63,9 @@ extension ExampleActivityItem: UIActivityItemSource {
         }
 
         if image != nil {
-            return "public.image"
+            return kUTTypeImage as String
         }
 
-        return "public.text"
+        return kUTTypeText as String
     }
 }

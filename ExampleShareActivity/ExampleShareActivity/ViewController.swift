@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         view.addSubview(button)
         view.addSubview(button2)
     }
-    
+
 }
 
 // MARK: UIActivityViewController
@@ -43,7 +43,8 @@ extension ViewController {
         let imageItem = ExampleActivityItem("Smiling Face", image: UIImage(named: "face"))
         let customItem = ExampleActivityItem("multi-data", image: UIImage(named: "face"), subject: "This is a smile.")
 
-        let activityItems = [textItem, imageItem, customItem]
+        let activityItems: [Any] = [textItem, ""]
+//        let activityItems: [Any] = [textItem, imageItem, customItem]
 
         // UIActivitys
         let activity = ExampleActivity("SmilingFace", image: UIImage(named: "face_60")) { (items) in
