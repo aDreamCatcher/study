@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC1A408122292A850011D2C2 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1A408022292A850011D2C2 /* ShareViewController.swift */; };
+		AC1A408422292A850011D2C2 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC1A408222292A850011D2C2 /* MainInterface.storyboard */; };
+		AC1A408822292A850011D2C2 /* shares.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AC1A407E22292A850011D2C2 /* shares.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AC1A408E2229348E0011D2C2 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1A408D2229348E0011D2C2 /* SelectViewController.swift */; };
+		AC1A40902229374D0011D2C2 /* SelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1A408F2229374D0011D2C2 /* SelectCell.swift */; };
 		ACCD31C0222633BA002AFBE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCD31BF222633BA002AFBE2 /* AppDelegate.swift */; };
 		ACCD31C2222633BA002AFBE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCD31C1222633BA002AFBE2 /* ViewController.swift */; };
 		ACCD31C5222633BA002AFBE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACCD31C3222633BA002AFBE2 /* Main.storyboard */; };
@@ -19,7 +24,37 @@
 		ACCD31DA22264B9E002AFBE2 /* face_56.png in Resources */ = {isa = PBXBuildFile; fileRef = ACCD31D722264B9E002AFBE2 /* face_56.png */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AC1A408622292A850011D2C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ACCD31B4222633BA002AFBE2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC1A407D22292A850011D2C2;
+			remoteInfo = shares;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AC1A408C22292A860011D2C2 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AC1A408822292A850011D2C2 /* shares.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		AC1A407E22292A850011D2C2 /* shares.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shares.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC1A408022292A850011D2C2 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		AC1A408322292A850011D2C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		AC1A408522292A850011D2C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC1A408D2229348E0011D2C2 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
+		AC1A408F2229374D0011D2C2 /* SelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCell.swift; sourceTree = "<group>"; };
 		ACCD31BC222633BA002AFBE2 /* ExampleShareActivity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleShareActivity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACCD31BF222633BA002AFBE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACCD31C1222633BA002AFBE2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +70,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AC1A407B22292A850011D2C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ACCD31B9222633BA002AFBE2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -45,10 +87,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC1A407F22292A850011D2C2 /* shares */ = {
+			isa = PBXGroup;
+			children = (
+				AC1A408022292A850011D2C2 /* ShareViewController.swift */,
+				AC1A408222292A850011D2C2 /* MainInterface.storyboard */,
+				AC1A408522292A850011D2C2 /* Info.plist */,
+				AC1A408D2229348E0011D2C2 /* SelectViewController.swift */,
+				AC1A408F2229374D0011D2C2 /* SelectCell.swift */,
+			);
+			path = shares;
+			sourceTree = "<group>";
+		};
 		ACCD31B3222633BA002AFBE2 = {
 			isa = PBXGroup;
 			children = (
 				ACCD31BE222633BA002AFBE2 /* ExampleShareActivity */,
+				AC1A407F22292A850011D2C2 /* shares */,
 				ACCD31BD222633BA002AFBE2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				ACCD31BC222633BA002AFBE2 /* ExampleShareActivity.app */,
+				AC1A407E22292A850011D2C2 /* shares.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +138,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AC1A407D22292A850011D2C2 /* shares */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC1A408B22292A860011D2C2 /* Build configuration list for PBXNativeTarget "shares" */;
+			buildPhases = (
+				AC1A407A22292A850011D2C2 /* Sources */,
+				AC1A407B22292A850011D2C2 /* Frameworks */,
+				AC1A407C22292A850011D2C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = shares;
+			productName = shares;
+			productReference = AC1A407E22292A850011D2C2 /* shares.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		ACCD31BB222633BA002AFBE2 /* ExampleShareActivity */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ACCD31CE222633BB002AFBE2 /* Build configuration list for PBXNativeTarget "ExampleShareActivity" */;
@@ -89,10 +162,12 @@
 				ACCD31B8222633BA002AFBE2 /* Sources */,
 				ACCD31B9222633BA002AFBE2 /* Frameworks */,
 				ACCD31BA222633BA002AFBE2 /* Resources */,
+				AC1A408C22292A860011D2C2 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AC1A408722292A850011D2C2 /* PBXTargetDependency */,
 			);
 			name = ExampleShareActivity;
 			productName = ExampleShareActivity;
@@ -109,6 +184,9 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Xin;
 				TargetAttributes = {
+					AC1A407D22292A850011D2C2 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					ACCD31BB222633BA002AFBE2 = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -128,11 +206,20 @@
 			projectRoot = "";
 			targets = (
 				ACCD31BB222633BA002AFBE2 /* ExampleShareActivity */,
+				AC1A407D22292A850011D2C2 /* shares */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AC1A407C22292A850011D2C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC1A408422292A850011D2C2 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ACCD31BA222633BA002AFBE2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -149,6 +236,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AC1A407A22292A850011D2C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC1A408E2229348E0011D2C2 /* SelectViewController.swift in Sources */,
+				AC1A408122292A850011D2C2 /* ShareViewController.swift in Sources */,
+				AC1A40902229374D0011D2C2 /* SelectCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ACCD31B8222633BA002AFBE2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -162,7 +259,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		AC1A408722292A850011D2C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC1A407D22292A850011D2C2 /* shares */;
+			targetProxy = AC1A408622292A850011D2C2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		AC1A408222292A850011D2C2 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC1A408322292A850011D2C2 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		ACCD31C3222633BA002AFBE2 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -182,6 +295,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AC1A408922292A860011D2C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7QZQ7GBMUX;
+				INFOPLIST_FILE = shares/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xin.ExampleShareActivity.shares;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AC1A408A22292A860011D2C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7QZQ7GBMUX;
+				INFOPLIST_FILE = shares/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xin.ExampleShareActivity.shares;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		ACCD31CC222633BB002AFBE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -301,6 +452,7 @@
 		ACCD31CF222633BB002AFBE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7QZQ7GBMUX;
@@ -319,6 +471,7 @@
 		ACCD31D0222633BB002AFBE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7QZQ7GBMUX;
@@ -337,6 +490,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AC1A408B22292A860011D2C2 /* Build configuration list for PBXNativeTarget "shares" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC1A408922292A860011D2C2 /* Debug */,
+				AC1A408A22292A860011D2C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		ACCD31B7222633BA002AFBE2 /* Build configuration list for PBXProject "ExampleShareActivity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
