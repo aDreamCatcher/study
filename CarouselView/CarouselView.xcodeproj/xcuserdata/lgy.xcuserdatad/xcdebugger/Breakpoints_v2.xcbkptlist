@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CarouselView/CarouselView.swift"
-            timestampString = "569955681.92349"
+            timestampString = "570068169.713037"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
             endingLineNumber = "97"
-            landmarkName = "targetContentOffset(forProposedContentOffset:withScrollingVelocity:)"
-            landmarkType = "7">
+            landmarkName = "CarouselView"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
