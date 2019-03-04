@@ -66,6 +66,7 @@ extension ExampleActivityItem: UIActivityItemSource {
             return kUTTypeImage as String
         }
 
-        return kUTTypeText as String
+        // kUTTypePlainText 对应 NSExtensionActivationSupportsText(shareExtension)
+        return kUTTypePlainText as String
     }
 }

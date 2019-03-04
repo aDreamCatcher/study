@@ -94,7 +94,6 @@ extension SelectViewController: UICollectionViewDataSource, UICollectionViewDele
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let block = selectBlock {
             block(items[indexPath.row])
-            navigationController?.popViewController(animated: true)
         }
     }
 }

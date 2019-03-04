@@ -13,6 +13,17 @@ class ShareViewController: SLComposeServiceViewController {
 
     override func isContentValid() -> Bool {
         // Do validation of contentText and/or NSExtensionContext attachments here
+        print("contentText: ", contentText)
+
+        for item in extensionContext?.inputItems ?? [] {
+            let item = item as! NSExtensionItem
+            print("--- inputItems ---")
+            print("attributedTitle: ", item.attributedTitle ?? "null")
+            print("\nuserInfo: ", item.userInfo ?? "null")
+            print("\nattachments: ", item.attachments ?? "null")
+            print("\nattributedConentText: ", item.attributedContentText ?? "null")
+        }
+
         return true
     }
 
@@ -33,7 +44,7 @@ class ShareViewController: SLComposeServiceViewController {
         configurationItem?.tapHandler = { [weak self] in
             self?.pushSelectViewController()
         }
-
+        
         let configurationItem2 = SLComposeSheetConfigurationItem()
         configurationItem2?.title = "titleTwo"
         configurationItem2?.value = "valueTwo"
@@ -57,9 +68,9 @@ extension ShareViewController {
 
         let selectViewController = SelectViewController { [weak self] (selectText) in
             self?.textView.text = self?.contentText.appending(" - \(selectText)")
+            self?.popConfigurationViewController()
         }
-
-        navigationController?.pushViewController(selectViewController,
-                                                 animated: true)
+        
+        pushConfigurationViewController(selectViewController)
     }
 }

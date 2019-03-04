@@ -41,10 +41,9 @@ extension ViewController {
         // UIActivityItems
         let textItem = ExampleActivityItem("Pig")
         let imageItem = ExampleActivityItem("Smiling Face", image: UIImage(named: "face"))
-        let customItem = ExampleActivityItem("multi-data", image: UIImage(named: "face"), subject: "This is a smile.")
+//        let customItem = ExampleActivityItem("multi-data", image: UIImage(named: "face"), subject: "This is a smile.")
 
-        let cusActivityItems: [Any] = [textItem, imageItem, customItem]
-        let activityItems: [Any] = ["only text"] // [textItem, ""] - 除wechat,会显示更多其他app
+        let activityItems: [Any] = [textItem, imageItem, "text-string", UIImage(named: "face_56") ?? ""]
 
         // UIActivitys
         let activity = ExampleActivity("SmilingFace", image: UIImage(named: "face_60")) { (items) in
