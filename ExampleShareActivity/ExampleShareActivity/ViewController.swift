@@ -59,7 +59,6 @@ extension ViewController {
 
         // present activityViewController
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: activities)
-//        activityViewController.excludedActivityTypes = [UIActivity.ActivityType("com.tencent.xin.sharetimeline")] // invalid for wechat
         activityViewController.modalPresentationStyle = .custom
 
         activityViewController.completionWithItemsHandler = { (type, completed, items, error) in
