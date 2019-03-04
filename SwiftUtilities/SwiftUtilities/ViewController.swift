@@ -1,0 +1,107 @@
+//
+//  ViewController.swift
+//  SwiftUtilities
+//
+//  Created by Guiyang Li on 2019/3/4.
+//  Copyright © 2019 Xin. All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+
+    private var items: [String] = {
+        return ["one", "two", "three", "four", "five", "one", "two", "three", "four", "five"]
+    }()
+
+    public var collectionView: UICollectionView?
+
+    public var refreshControl: UIRefreshControl?
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+
+        setupUI()
+    }
+
+    // MARK: UI
+    private func setupUI() {
+        let width = view.frame.size.width
+        let frame = view.bounds
+
+        // collection view
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: 0,
+                                               left: 20,
+                                               bottom: 0,
+                                               right: 20)
+        flowLayout.itemSize = CGSize(width: width,
+                                     height: 80.0)
+        flowLayout.minimumLineSpacing = 1.0
+
+        collectionView = UICollectionView(frame: frame,
+                                          collectionViewLayout: flowLayout)
+        collectionView?.register(BaseCollectionViewCell.self,
+                                 forCellWithReuseIdentifier: BaseCollectionViewCell.reuseID)
+        collectionView?.backgroundColor = UIColor.yellow
+        collectionView?.dataSource = self
+        collectionView?.delegate = self
+
+        // refresh control
+        refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = UIColor.blue
+        refreshControl?.attributedTitle = NSAttributedString(string: "下拉刷新...")
+        refreshControl?.addTarget(self, action: #selector(refreshControlValueChanged), for: .valueChanged)
+
+        // addSubviews
+        if let collectionView = collectionView,
+            let refreshControl = refreshControl {
+            view.addSubview(collectionView)
+            collectionView.addSubview(refreshControl)
+        }
+    }
+}
+
+// MARK: - UIRefreshControl
+extension ViewController {
+    @objc func refreshControlValueChanged() {
+        refreshControl?.attributedTitle = NSAttributedString(string: "开始加载...")
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            self.refreshControl?.attributedTitle = NSAttributedString(string: "加载完毕！")
+            self.refreshControl?.endRefreshing()
+        }
+    }
+}
+
+// MARK: - UICollectionView delegate and datasource
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.reuseID,
+                                                      for: indexPath) as! BaseCollectionViewCell
+        cell.setText(items[indexPath.row])
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("didSelect: ", items[indexPath.row])
+
+        switch indexPath.row {
+        case 0:
+            refreshControl?.beginRefreshing()
+        default:
+            print("")
+        }
+    }
+}
+
