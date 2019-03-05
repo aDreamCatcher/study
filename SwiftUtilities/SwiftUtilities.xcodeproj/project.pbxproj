@@ -15,6 +15,8 @@
 		ACCBFAED222D003C00598430 /* SwiftUtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCBFAEC222D003C00598430 /* SwiftUtilitiesTests.swift */; };
 		ACCBFAF8222D003C00598430 /* SwiftUtilitiesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCBFAF7222D003C00598430 /* SwiftUtilitiesUITests.swift */; };
 		ACCBFB06222D02EC00598430 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCBFB05222D02EC00598430 /* BaseCollectionViewCell.swift */; };
+		ACDA31F9222E42D200B4F164 /* RandomUserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDA31F8222E42D200B4F164 /* RandomUserAgent.swift */; };
+		ACDA31FB222E4F6800B4F164 /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDA31FA222E4F6800B4F164 /* UserAgent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		ACCBFAF7222D003C00598430 /* SwiftUtilitiesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUtilitiesUITests.swift; sourceTree = "<group>"; };
 		ACCBFAF9222D003C00598430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACCBFB05222D02EC00598430 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		ACDA31F8222E42D200B4F164 /* RandomUserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomUserAgent.swift; sourceTree = "<group>"; };
+		ACDA31FA222E4F6800B4F164 /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				ACCBFADE222D003C00598430 /* Assets.xcassets */,
 				ACCBFAE0222D003C00598430 /* LaunchScreen.storyboard */,
 				ACCBFAE3222D003C00598430 /* Info.plist */,
+				ACDA31F8222E42D200B4F164 /* RandomUserAgent.swift */,
+				ACDA31FA222E4F6800B4F164 /* UserAgent.swift */,
 			);
 			path = SwiftUtilities;
 			sourceTree = "<group>";
@@ -262,6 +268,8 @@
 				ACCBFADA222D003B00598430 /* ViewController.swift in Sources */,
 				ACCBFAD8222D003B00598430 /* AppDelegate.swift in Sources */,
 				ACCBFB06222D02EC00598430 /* BaseCollectionViewCell.swift in Sources */,
+				ACDA31F9222E42D200B4F164 /* RandomUserAgent.swift in Sources */,
+				ACDA31FB222E4F6800B4F164 /* UserAgent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

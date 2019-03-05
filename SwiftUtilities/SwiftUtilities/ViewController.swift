@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     private var items: [String] = {
-        return ["one", "two", "three", "four", "five", "one", "two", "three", "four", "five"]
+        return ["RandomUserAgent"]
     }()
 
     public var collectionView: UICollectionView?
@@ -98,7 +98,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
         switch indexPath.row {
         case 0:
-            refreshControl?.beginRefreshing()
+            let randomUserAgentVC = RandomUserAgentViewController()
+            present(randomUserAgentVC, animated: true) {
+                print("present: ", randomUserAgentVC.self)
+            }
         default:
             print("")
         }
