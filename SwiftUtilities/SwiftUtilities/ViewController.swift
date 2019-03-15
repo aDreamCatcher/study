@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     private var items: [String] = {
-        return ["RandomUserAgent"]
+        return ["RandomUserAgent", "webView.title", "wkWebView.Title", "presentNav"]
     }()
 
     public var collectionView: UICollectionView?
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
                                                bottom: 0,
                                                right: 20)
         flowLayout.itemSize = CGSize(width: width,
-                                     height: 80.0)
+                                     height: 44.0)
         flowLayout.minimumLineSpacing = 1.0
 
         collectionView = UICollectionView(frame: frame,
@@ -96,15 +96,39 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didSelect: ", items[indexPath.row])
 
+        var viewController: UIViewController?
         switch indexPath.row {
         case 0:
-            let randomUserAgentVC = RandomUserAgentViewController()
-            present(randomUserAgentVC, animated: true) {
-                print("present: ", randomUserAgentVC.self)
-            }
+            viewController = RandomUserAgentViewController()
+        case 1:
+            viewController = WebViewController()
+        case 2:
+            viewController = WKWebViewController()
+        case 3:
+            presentNav()
         default:
             print("")
+        }
+
+        if let viewController = viewController {
+            navigationController?.pushViewController(viewController,
+                                                     animated: true)
         }
     }
 }
 
+extension ViewController {
+    private func presentNav() {
+        let vc = ViewController()
+//        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "leftBarItem", style: .plain, target: self, action: #selector(dismissAction))
+
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav,
+                animated: true,
+                completion: nil)
+    }
+
+    @objc private func dismissAction() {
+        dismiss(animated: true, completion: nil)
+    }
+}
