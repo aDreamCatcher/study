@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if let viewController = viewController {
             let rootNav = UINavigationController(rootViewController: viewController)
+            rootNav.interactivePopGestureRecognizer?.isEnabled = false
             window?.rootViewController = rootNav
             window?.makeKeyAndVisible()
         }

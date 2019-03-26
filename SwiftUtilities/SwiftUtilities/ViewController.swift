@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     private var items: [String] = {
-        return ["RandomUserAgent", "webView.title", "wkWebView.Title", "presentNav"]
+        return ["RandomUserAgent", "webView.title", "wkWebView.Title", "presentNav", "SliderElement"]
     }()
 
     public var collectionView: UICollectionView?
@@ -106,6 +106,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
             viewController = WKWebViewController()
         case 3:
             presentNav()
+        case 4:
+            viewController = SlideBlockViewController()
         default:
             print("")
         }

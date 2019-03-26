@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC0CB1FC2249D707001BD250 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0CB1FB2249D707001BD250 /* CustomSlider.swift */; };
 		AC1D42982238D73500E4C395 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D42972238D73500E4C395 /* WebViewController.swift */; };
 		AC1D429A2239057900E4C395 /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D42992239057900E4C395 /* WKWebViewController.swift */; };
+		ACAD2E3722487A87008F1A2D /* SlideBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD2E3622487A87008F1A2D /* SlideBlockView.swift */; };
+		ACAD2E3A22487C32008F1A2D /* SlideBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD2E3922487C32008F1A2D /* SlideBlockViewController.swift */; };
 		ACCBFAD8222D003B00598430 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCBFAD7222D003B00598430 /* AppDelegate.swift */; };
 		ACCBFADA222D003B00598430 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCBFAD9222D003B00598430 /* ViewController.swift */; };
 		ACCBFADD222D003B00598430 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACCBFADB222D003B00598430 /* Main.storyboard */; };
@@ -39,8 +42,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC0CB1FB2249D707001BD250 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		AC1D42972238D73500E4C395 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		AC1D42992239057900E4C395 /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
+		ACAD2E3622487A87008F1A2D /* SlideBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideBlockView.swift; sourceTree = "<group>"; };
+		ACAD2E3922487C32008F1A2D /* SlideBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideBlockViewController.swift; sourceTree = "<group>"; };
 		ACCBFAD4222D003B00598430 /* SwiftUtilities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUtilities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACCBFAD7222D003B00598430 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACCBFAD9222D003B00598430 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +90,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ACAD2E3822487B0B008F1A2D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ACAD2E3622487A87008F1A2D /* SlideBlockView.swift */,
+				AC0CB1FB2249D707001BD250 /* CustomSlider.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		ACCBFACB222D003B00598430 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +122,7 @@
 		ACCBFAD6222D003B00598430 /* SwiftUtilities */ = {
 			isa = PBXGroup;
 			children = (
+				ACAD2E3822487B0B008F1A2D /* Views */,
 				ACCBFAD7222D003B00598430 /* AppDelegate.swift */,
 				ACCBFAD9222D003B00598430 /* ViewController.swift */,
 				ACCBFB05222D02EC00598430 /* BaseCollectionViewCell.swift */,
@@ -118,6 +134,7 @@
 				ACDA31FA222E4F6800B4F164 /* UserAgent.swift */,
 				AC1D42972238D73500E4C395 /* WebViewController.swift */,
 				AC1D42992239057900E4C395 /* WKWebViewController.swift */,
+				ACAD2E3922487C32008F1A2D /* SlideBlockViewController.swift */,
 			);
 			path = SwiftUtilities;
 			sourceTree = "<group>";
@@ -272,12 +289,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACCBFADA222D003B00598430 /* ViewController.swift in Sources */,
+				AC0CB1FC2249D707001BD250 /* CustomSlider.swift in Sources */,
 				AC1D42982238D73500E4C395 /* WebViewController.swift in Sources */,
 				AC1D429A2239057900E4C395 /* WKWebViewController.swift in Sources */,
 				ACCBFAD8222D003B00598430 /* AppDelegate.swift in Sources */,
 				ACCBFB06222D02EC00598430 /* BaseCollectionViewCell.swift in Sources */,
 				ACDA31F9222E42D200B4F164 /* RandomUserAgent.swift in Sources */,
+				ACAD2E3722487A87008F1A2D /* SlideBlockView.swift in Sources */,
 				ACDA31FB222E4F6800B4F164 /* UserAgent.swift in Sources */,
+				ACAD2E3A22487C32008F1A2D /* SlideBlockViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
