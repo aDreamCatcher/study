@@ -25,7 +25,7 @@
 		AC3C5FC222E843AA00EB0752 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3C5FC122E843AA00EB0752 /* UserData.swift */; };
 		ACC5494D22E0687800789B2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC5494C22E0687800789B2A /* AppDelegate.swift */; };
 		ACC5494F22E0687800789B2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC5494E22E0687800789B2A /* SceneDelegate.swift */; };
-		ACC5495122E0687800789B2A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC5495022E0687800789B2A /* ContentView.swift */; };
+		ACC5495122E0687800789B2A /* LandmarkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC5495022E0687800789B2A /* LandmarkDetail.swift */; };
 		ACC5495322E0687900789B2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACC5495222E0687900789B2A /* Assets.xcassets */; };
 		ACC5495622E0687900789B2A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACC5495522E0687900789B2A /* Preview Assets.xcassets */; };
 		ACC5495922E0687900789B2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACC5495722E0687900789B2A /* LaunchScreen.storyboard */; };
@@ -75,7 +75,7 @@
 		ACC5494922E0687800789B2A /* Landmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Landmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC5494C22E0687800789B2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACC5494E22E0687800789B2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ACC5495022E0687800789B2A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ACC5495022E0687800789B2A /* LandmarkDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDetail.swift; sourceTree = "<group>"; };
 		ACC5495222E0687900789B2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACC5495522E0687900789B2A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ACC5495822E0687900789B2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -139,6 +139,19 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		AC3C5FC322E84F6900EB0752 /* SwiftUI_Essentials */ = {
+			isa = PBXGroup;
+			children = (
+				ACC5495022E0687800789B2A /* LandmarkDetail.swift */,
+				ACC5497C22E071EC00789B2A /* CircleImage.swift */,
+				ACC5497E22E0759700789B2A /* MapView.swift */,
+				ACC5498022E173EC00789B2A /* LandmarkRow.swift */,
+				AC3C5FA022E828E500EB0752 /* LandmarkList.swift */,
+				AC3C5FC122E843AA00EB0752 /* UserData.swift */,
+			);
+			path = SwiftUI_Essentials;
+			sourceTree = "<group>";
+		};
 		ACC5494022E0687800789B2A = {
 			isa = PBXGroup;
 			children = (
@@ -162,20 +175,15 @@
 		ACC5494B22E0687800789B2A /* Landmarks */ = {
 			isa = PBXGroup;
 			children = (
+				AC3C5FC322E84F6900EB0752 /* SwiftUI_Essentials */,
 				AC3C5FA422E8402F00EB0752 /* Resources */,
 				ACC5498222E1747E00789B2A /* Models */,
 				ACC5494C22E0687800789B2A /* AppDelegate.swift */,
 				ACC5494E22E0687800789B2A /* SceneDelegate.swift */,
-				ACC5495022E0687800789B2A /* ContentView.swift */,
 				ACC5495222E0687900789B2A /* Assets.xcassets */,
 				ACC5495722E0687900789B2A /* LaunchScreen.storyboard */,
 				ACC5495A22E0687900789B2A /* Info.plist */,
 				ACC5495422E0687900789B2A /* Preview Content */,
-				ACC5497C22E071EC00789B2A /* CircleImage.swift */,
-				ACC5497E22E0759700789B2A /* MapView.swift */,
-				ACC5498022E173EC00789B2A /* LandmarkRow.swift */,
-				AC3C5FA022E828E500EB0752 /* LandmarkList.swift */,
-				AC3C5FC122E843AA00EB0752 /* UserData.swift */,
 			);
 			path = Landmarks;
 			sourceTree = "<group>";
@@ -367,7 +375,7 @@
 				AC3C5FA122E828E500EB0752 /* LandmarkList.swift in Sources */,
 				ACC5497F22E0759700789B2A /* MapView.swift in Sources */,
 				ACC5494F22E0687800789B2A /* SceneDelegate.swift in Sources */,
-				ACC5495122E0687800789B2A /* ContentView.swift in Sources */,
+				ACC5495122E0687800789B2A /* LandmarkDetail.swift in Sources */,
 				AC3C5FC222E843AA00EB0752 /* UserData.swift in Sources */,
 				ACC549A122E176FD00789B2A /* Data.swift in Sources */,
 			);
