@@ -165,13 +165,21 @@
 		AC3C5FC422E8501600EB0752 /* DrawingAndAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				AC3C5FD022E956FA00EB0752 /* DrawingPathsAndShapes */,
+			);
+			path = DrawingAndAnimation;
+			sourceTree = "<group>";
+		};
+		AC3C5FD022E956FA00EB0752 /* DrawingPathsAndShapes */ = {
+			isa = PBXGroup;
+			children = (
 				AC3C5FC522E8505000EB0752 /* Badge.swift */,
 				AC3C5FC722E851E000EB0752 /* HexagonParameters.swift */,
 				AC3C5FC922E8606700EB0752 /* BadgeBackground.swift */,
 				AC3C5FCB22E861AF00EB0752 /* BadgeSymbol.swift */,
 				AC3C5FCD22E86D9100EB0752 /* RotatedBadgeSymbol.swift */,
 			);
-			path = DrawingAndAnimation;
+			path = DrawingPathsAndShapes;
 			sourceTree = "<group>";
 		};
 		ACC5494022E0687800789B2A = {
