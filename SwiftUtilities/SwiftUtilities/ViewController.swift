@@ -23,7 +23,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        setupUI()
+//        setupUI()
+        sequenceLazy() // Do you really understand lazy.
     }
 
     // MARK: UI
@@ -132,5 +133,29 @@ extension ViewController {
 
     @objc private func dismissAction() {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - some knowledge
+
+extension ViewController {
+
+    /// Do you really understand lazy
+    private func sequenceLazy() {
+        let data = 1...3
+        let results = data.lazy.map { (element) -> Int in
+            print("正在处理 \(element)")
+            return element * 2
+        }
+
+        print("准备访问结果...")
+        for element in results {
+            print("处理后结果为 \(element)")
+        }
+
+//        print("处理后结果为 \(results.last)")
+
+
+        print("Done")
     }
 }
