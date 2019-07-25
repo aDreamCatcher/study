@@ -34,6 +34,8 @@
 		AC3C5FD922E95BBF00EB0752 /* HikeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3C5FD822E95BBF00EB0752 /* HikeGraph.swift */; };
 		AC3C5FDD22E97CED00EB0752 /* GraphCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3C5FDC22E97CED00EB0752 /* GraphCapsule.swift */; };
 		AC3C5FDF22E9869F00EB0752 /* HikeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3C5FDE22E9869F00EB0752 /* HikeDetail.swift */; };
+		AC3C5FE322E9A1DA00EB0752 /* CategoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3C5FE222E9A1DA00EB0752 /* CategoryHome.swift */; };
+		AC3C5FE522E9A52B00EB0752 /* CategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3C5FE422E9A52B00EB0752 /* CategoryRow.swift */; };
 		ACC5494D22E0687800789B2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC5494C22E0687800789B2A /* AppDelegate.swift */; };
 		ACC5494F22E0687800789B2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC5494E22E0687800789B2A /* SceneDelegate.swift */; };
 		ACC5495122E0687800789B2A /* LandmarkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC5495022E0687800789B2A /* LandmarkDetail.swift */; };
@@ -94,6 +96,8 @@
 		AC3C5FD822E95BBF00EB0752 /* HikeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikeGraph.swift; sourceTree = "<group>"; };
 		AC3C5FDC22E97CED00EB0752 /* GraphCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCapsule.swift; sourceTree = "<group>"; };
 		AC3C5FDE22E9869F00EB0752 /* HikeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikeDetail.swift; sourceTree = "<group>"; };
+		AC3C5FE222E9A1DA00EB0752 /* CategoryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHome.swift; sourceTree = "<group>"; };
+		AC3C5FE422E9A52B00EB0752 /* CategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRow.swift; sourceTree = "<group>"; };
 		ACC5494922E0687800789B2A /* Landmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Landmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC5494C22E0687800789B2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACC5494E22E0687800789B2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +210,23 @@
 			path = AnimatingViewsAndTransitions;
 			sourceTree = "<group>";
 		};
+		AC3C5FE022E9A19C00EB0752 /* AppDesignAndLayout */ = {
+			isa = PBXGroup;
+			children = (
+				AC3C5FE122E9A1AB00EB0752 /* ComposingComplexInterfaces */,
+			);
+			path = AppDesignAndLayout;
+			sourceTree = "<group>";
+		};
+		AC3C5FE122E9A1AB00EB0752 /* ComposingComplexInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				AC3C5FE222E9A1DA00EB0752 /* CategoryHome.swift */,
+				AC3C5FE422E9A52B00EB0752 /* CategoryRow.swift */,
+			);
+			path = ComposingComplexInterfaces;
+			sourceTree = "<group>";
+		};
 		ACC5494022E0687800789B2A = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +250,7 @@
 		ACC5494B22E0687800789B2A /* Landmarks */ = {
 			isa = PBXGroup;
 			children = (
+				AC3C5FE022E9A19C00EB0752 /* AppDesignAndLayout */,
 				AC3C5FC422E8501600EB0752 /* DrawingAndAnimation */,
 				AC3C5FC322E84F6900EB0752 /* SwiftUI_Essentials */,
 				AC3C5FA422E8402F00EB0752 /* Resources */,
@@ -426,7 +448,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC3C5FE522E9A52B00EB0752 /* CategoryRow.swift in Sources */,
 				AC3C5FD722E95A4500EB0752 /* Hike.swift in Sources */,
+				AC3C5FE322E9A1DA00EB0752 /* CategoryHome.swift in Sources */,
 				AC3C5FD922E95BBF00EB0752 /* HikeGraph.swift in Sources */,
 				AC3C5FC822E851E000EB0752 /* HexagonParameters.swift in Sources */,
 				ACC5498422E1749500789B2A /* Landmark.swift in Sources */,

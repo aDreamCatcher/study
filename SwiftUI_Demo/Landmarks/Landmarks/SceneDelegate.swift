@@ -23,7 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(
-                rootView: HikeView(hike: hikeData[0])
+                rootView: CategoryHome()
+                    .environmentObject(UserData())
+//                rootView: HikeView(hike: hikeData[0])
 //                rootView: Badge()
 //                rootView: LandmarkList()
 //                    .environmentObject(UserData())
