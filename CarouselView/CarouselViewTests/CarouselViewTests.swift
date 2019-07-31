@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import CarouselView
 
 class CarouselViewTests: XCTestCase {
 

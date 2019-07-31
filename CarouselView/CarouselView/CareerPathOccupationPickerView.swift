@@ -92,7 +92,7 @@ class CareerPathOccupationPickerView: UIView {
         // config collectionView
         collectionView.collectionViewLayout = horizontalLayout
         collectionView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
-        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+//        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = Constant.backgroundColor
         collectionView.register(OccupationCollectionViewCell.self,
